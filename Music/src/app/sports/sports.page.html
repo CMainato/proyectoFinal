@@ -1,0 +1,45 @@
+<ion-header >
+  <ion-toolbar text-center >
+    <ion-buttons slot="start">
+      <ion-avatar class="header-avatar">
+        <img src="assets/img/user.jpg" alt="User Image" />
+      </ion-avatar>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title text-center>
+      <img src="assets/img/logo.png" alt="Platzi Logo" height="32px" />
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding color ="black">
+
+  
+  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d255347.01839045493!2d-78.43053819999999!3d-0.18659435000000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2sec!4v1600393729787!5m2!1ses!2sec" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+  <ion-searchbar color ="dark"
+    [(ngModel)]="searchTerm"
+    (ionChange)="setFilteredItems()"
+  ></ion-searchbar>
+  <div *ngIf="searching" class="spinner-container" text-center>
+    <ion-spinner></ion-spinner>
+  </div>
+  <ion-virtual-scroll [items]="items" approxItemHeight="50px">
+    <ion-item *virtualItem="let item">
+      {{ item.name }}
+      <ion-icon
+        *ngIf="!item.playing"
+        name="play"
+        slot="end"
+        (click)="play(item)"
+      ></ion-icon>
+      <ion-icon
+        *ngIf="item.playing"
+        name="pause"
+        slot="end"
+        (click)="pause(item)"
+      ></ion-icon>
+      <ion-spinner *ngIf="item.playing" name="dots" slot="end"></ion-spinner>
+    </ion-item>
+  </ion-virtual-scroll>
+</ion-content>
